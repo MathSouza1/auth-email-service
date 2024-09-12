@@ -1,4 +1,4 @@
-package br.com.empiricus.auth_email_service.emails.adapter.inbound;
+package br.com.empiricus.auth_email_service.emails.adapters.inbound;
 
 import br.com.empiricus.auth_email_service.emails.core.dtos.EmailsListDTO;
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.FindEmailPort;

@@ -1,6 +1,6 @@
 package br.com.empiricus.auth_email_service.emails.core.dtos;
 
-import br.com.empiricus.auth_email_service.emails.adapter.outbound.entity.EmailEntity;
+import br.com.empiricus.auth_email_service.emails.adapters.outbound.entity.EmailEntity;
 
 public class EmailsListDTO {
 

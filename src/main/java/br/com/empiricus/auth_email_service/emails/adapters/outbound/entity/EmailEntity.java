@@ -1,4 +1,4 @@
-package br.com.empiricus.auth_email_service.emails.adapter.outbound.entity;
+package br.com.empiricus.auth_email_service.emails.adapters.outbound.entity;
 
 import br.com.empiricus.auth_email_service.emails.core.domain.Email;
 import jakarta.persistence.*;

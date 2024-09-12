@@ -1,6 +1,6 @@
-package br.com.empiricus.auth_email_service.emails.adapter.outbound.repository;
+package br.com.empiricus.auth_email_service.emails.adapters.outbound.repository;
 
-import br.com.empiricus.auth_email_service.emails.adapter.outbound.entity.EmailEntity;
+import br.com.empiricus.auth_email_service.emails.adapters.outbound.entity.EmailEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

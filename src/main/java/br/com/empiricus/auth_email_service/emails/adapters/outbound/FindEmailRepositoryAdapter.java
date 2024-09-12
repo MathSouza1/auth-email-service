@@ -1,7 +1,7 @@
-package br.com.empiricus.auth_email_service.emails.adapter.outbound;
+package br.com.empiricus.auth_email_service.emails.adapters.outbound;
 
-import br.com.empiricus.auth_email_service.emails.adapter.outbound.entity.EmailEntity;
-import br.com.empiricus.auth_email_service.emails.adapter.outbound.repository.EmailRepository;
+import br.com.empiricus.auth_email_service.emails.adapters.outbound.entity.EmailEntity;
+import br.com.empiricus.auth_email_service.emails.adapters.outbound.repository.EmailRepository;
 import br.com.empiricus.auth_email_service.emails.core.dtos.EmailsListDTO;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.FindEmailRepositoryPort;
 import org.springframework.stereotype.Component;
