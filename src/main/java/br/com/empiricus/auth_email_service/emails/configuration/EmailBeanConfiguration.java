@@ -3,6 +3,7 @@ package br.com.empiricus.auth_email_service.emails.configuration;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.DeleteEmailRepositoryPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.FindEmailRepositoryPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.SaveEmailRepositoryPort;
+import br.com.empiricus.auth_email_service.emails.core.ports.outbound.SendEmailRepositoryPort;
 import br.com.empiricus.auth_email_service.emails.core.services.DeleteEmailService;
 import br.com.empiricus.auth_email_service.emails.core.services.FindEmailService;
 import br.com.empiricus.auth_email_service.emails.core.services.SaveEmailService;
@@ -19,12 +20,12 @@ public class EmailBeanConfiguration {
     }
 
     @Bean
-    public SaveEmailService saveEmailService(SaveEmailRepositoryPort saveEmailRepository, FindUserRepositoryPort findUserRepositoryPort) {
-        return new SaveEmailService(saveEmailRepository, findUserRepositoryPort);
+    public SaveEmailService saveEmailService(SaveEmailRepositoryPort saveEmailRepository, SendEmailRepositoryPort sendEmailRepositoryPort, FindUserRepositoryPort findUserRepositoryPort, FindEmailRepositoryPort findEmailRepositoryPort) {
+        return new SaveEmailService(saveEmailRepository, sendEmailRepositoryPort, findUserRepositoryPort, findEmailRepositoryPort);
     }
 
     @Bean
-    public DeleteEmailService deleteEmailService(DeleteEmailRepositoryPort deleteEmailRepository) {
-        return new DeleteEmailService(deleteEmailRepository);
+    public DeleteEmailService deleteEmailService(DeleteEmailRepositoryPort deleteEmailRepository, SendEmailRepositoryPort sendEmailRepositoryPort, FindEmailRepositoryPort findEmailRepositoryPort) {
+        return new DeleteEmailService(deleteEmailRepository, sendEmailRepositoryPort, findEmailRepositoryPort);
     }
 }
