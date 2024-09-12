@@ -4,9 +4,11 @@ import br.com.empiricus.auth_email_service.users.core.domain.User;
 import br.com.empiricus.auth_email_service.users.core.dtos.CreateUserDTO;
 import br.com.empiricus.auth_email_service.users.core.dtos.UpdateUserDTO;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
+import br.com.empiricus.auth_email_service.users.core.ports.inbound.DeleteUserPort;
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.FindUserPort;
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.SaveUserPort;
 import jakarta.validation.Valid;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +22,12 @@ public class UserController {
 
     private final FindUserPort findUser;
     private final SaveUserPort saveUser;
+    private final DeleteUserPort deleteUser;
 
-    public UserController(FindUserPort findUser, SaveUserPort saveUser) {
+    public UserController(FindUserPort findUser, SaveUserPort saveUser, DeleteUserPort deleteUser) {
         this.findUser = findUser;
         this.saveUser = saveUser;
+        this.deleteUser = deleteUser;
     }
 
     @GetMapping("/{cpf}")
@@ -49,5 +53,14 @@ public class UserController {
             return new ResponseEntity<>(saveUser.update(updateUserDTO), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{cpf}")
+    public ResponseEntity<String> deleteUser(@PathVariable String cpf) throws UserNotFoundException {
+        if(findUserByCpf(cpf).getStatusCode().is2xxSuccessful()) {
+            deleteUser.execute(cpf);
+            return new ResponseEntity<>("User with the CPF: " + cpf + " deleted successfully.", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("User with the CPF: " + cpf + " does NOT exists.", HttpStatus.NOT_FOUND);
     }
 }
