@@ -1,4 +1,4 @@
-package br.com.empiricus.auth_email_service.users.core.service;
+package br.com.empiricus.auth_email_service.users.core.services;
 
 import br.com.empiricus.auth_email_service.users.core.domain.User;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;

@@ -41,6 +41,16 @@ public class UserEntity {
     @Column(name = "eh_admin")
     private boolean admin;
 
+    public UserEntity(User user) {
+        this.id = user.getId();
+        this.name = user.getName();
+        this.cpf = user.getCpf();
+        this.password = user.getPassword();
+        this.creationDate = user.getCreationDate();
+        this.updateDate = user.getUpdateDate();
+        this.admin = user.getAdmin();
+    }
+
     public User toUser() {
         return new User(this.id, this.name, this.cpf, this.password, this.creationDate, this.updateDate, this.admin);
     }

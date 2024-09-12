@@ -1,33 +1,53 @@
 package br.com.empiricus.auth_email_service.users.adapters.inbound;
 
 import br.com.empiricus.auth_email_service.users.core.domain.User;
+import br.com.empiricus.auth_email_service.users.core.dtos.CreateUserDTO;
+import br.com.empiricus.auth_email_service.users.core.dtos.UpdateUserDTO;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.FindUserPort;
+import br.com.empiricus.auth_email_service.users.core.ports.inbound.SaveUserPort;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final FindUserPort findUser;
+    private final SaveUserPort saveUser;
 
-    public UserController(FindUserPort findUser) {
+    public UserController(FindUserPort findUser, SaveUserPort saveUser) {
         this.findUser = findUser;
+        this.saveUser = saveUser;
     }
 
     @GetMapping("/{cpf}")
     public ResponseEntity<User> findUserByCpf(@PathVariable String cpf) throws UserNotFoundException {
-        return ResponseEntity.ok().body(findUser.findByCpf(cpf));
+        return new ResponseEntity<>(findUser.findByCpf(cpf), HttpStatus.OK);
     }
 
     @GetMapping()
     public ResponseEntity<List<User>> findAllUsers() {
-        return ResponseEntity.ok().body(findUser.findAll());
+        return new ResponseEntity<>(findUser.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping()
+    public ResponseEntity<User> createUser(@RequestBody @Valid CreateUserDTO createUserDTO) {
+        return new ResponseEntity<>(saveUser.create(createUserDTO), HttpStatus.CREATED);
+    }
+
+    @PutMapping()
+    public ResponseEntity<User> updateUser(@RequestBody @Valid UpdateUserDTO updateUserDTO) throws UserNotFoundException {
+        User user = findUserByCpf(updateUserDTO.getCpf()).getBody();
+        if (Objects.nonNull(user)) {
+            updateUserDTO.setCreationDate(user.getCreationDate());
+            return new ResponseEntity<>(saveUser.update(updateUserDTO), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
