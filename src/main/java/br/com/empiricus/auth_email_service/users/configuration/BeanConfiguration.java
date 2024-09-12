@@ -1,7 +1,9 @@
 package br.com.empiricus.auth_email_service.users.configuration;
 
+import br.com.empiricus.auth_email_service.users.core.ports.outbound.DeleteUserRepositoryPort;
 import br.com.empiricus.auth_email_service.users.core.ports.outbound.FindUserRepositoryPort;
 import br.com.empiricus.auth_email_service.users.core.ports.outbound.SaveUserRepositoryPort;
+import br.com.empiricus.auth_email_service.users.core.services.DeleteUserService;
 import br.com.empiricus.auth_email_service.users.core.services.FindUserService;
 import br.com.empiricus.auth_email_service.users.core.services.SaveUserService;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +20,10 @@ public class BeanConfiguration {
     @Bean
     public SaveUserService saveUserService(SaveUserRepositoryPort saveUserRepository) {
         return new SaveUserService(saveUserRepository);
+    }
+
+    @Bean
+    public DeleteUserService deleteUserService(DeleteUserRepositoryPort deleteUserRepository) {
+        return new DeleteUserService(deleteUserRepository);
     }
 }
