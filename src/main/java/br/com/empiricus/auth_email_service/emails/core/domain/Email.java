@@ -1,5 +1,9 @@
 package br.com.empiricus.auth_email_service.emails.core.domain;
 
+import br.com.empiricus.auth_email_service.emails.core.dtos.CreateEmailDTO;
+
+import java.time.LocalDateTime;
+
 public class Email {
 
     private String id;
@@ -19,6 +23,14 @@ public class Email {
         this.creationDate = creationDate;
         this.updateDate = updateDate;
         this.admin = admin;
+    }
+
+    public Email(CreateEmailDTO createEmailDTO) {
+        this.cpf = createEmailDTO.getCpf();
+        this.email = createEmailDTO.getEmail();
+        this.creationDate = LocalDateTime.now().toString();
+        this.updateDate = LocalDateTime.now().toString();
+        this.admin = createEmailDTO.isAdmin();
     }
 
     public String getId() {

@@ -37,6 +37,15 @@ public class EmailEntity {
     @Column(name = "eh_admin")
     private boolean admin;
 
+    public EmailEntity(Email email) {
+        this.id = email.getId();
+        this.cpf = email.getCpf();
+        this.email = email.getEmail();
+        this.creationDate = email.getCreationDate();
+        this.updateDate = email.getUpdateDate();
+        this.admin = email.isAdmin();
+    }
+
     public Email toEmail() {
         return new Email(this.id, this.cpf, this.email, this.creationDate, this.updateDate, this.admin);
     }
