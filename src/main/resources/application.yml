@@ -9,3 +9,15 @@ spring:
     url: "${DATABASE_URL}"
     username: "${DATABASE_USERNAME}"
     password: "${DATABASE_PASSWORD}"
+  mail:
+    email: "${MAIL_SENDER}"
+    host: "${MAIL_HOST}"
+    port: "${MAIL_PORT}"
+    username: "${MAIL_USERNAME}"
+    password: "${MAIL_PASSWORD}"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
