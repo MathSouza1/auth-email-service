@@ -24,7 +24,7 @@ public class EmailBeanConfiguration {
     }
 
     @Bean
-    public DeleteEmailService deleteEmailService(DeleteEmailRepositoryPort deleteEmailRepository, FindUserRepositoryPort findUserRepositoryPort) {
-        return new DeleteEmailService(deleteEmailRepository, findUserRepositoryPort);
+    public DeleteEmailService deleteEmailService(DeleteEmailRepositoryPort deleteEmailRepository) {
+        return new DeleteEmailService(deleteEmailRepository);
     }
 }
