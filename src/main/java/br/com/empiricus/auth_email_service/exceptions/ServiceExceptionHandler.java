@@ -1,5 +1,6 @@
 package br.com.empiricus.auth_email_service.exceptions;
 
+import br.com.empiricus.auth_email_service.emails.core.exceptions.EmailNotFoundException;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +18,15 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ServiceErrorMessage> userNotFoundHandler(UserNotFoundException exception) {
+        ServiceErrorMessage errorMessage = new ServiceErrorMessage(
+                new Date(),
+                HttpStatus.NOT_FOUND.value(),
+                exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
+    }
+
+    @ExceptionHandler(EmailNotFoundException.class)
+    public ResponseEntity<ServiceErrorMessage> emailsNotFoundHandler(EmailNotFoundException exception) {
         ServiceErrorMessage errorMessage = new ServiceErrorMessage(
                 new Date(),
                 HttpStatus.NOT_FOUND.value(),

@@ -1,6 +1,7 @@
 package br.com.empiricus.auth_email_service.emails.core.services;
 
 import br.com.empiricus.auth_email_service.emails.core.dtos.EmailsListDTO;
+import br.com.empiricus.auth_email_service.emails.core.exceptions.EmailNotFoundException;
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.FindEmailPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.FindEmailRepositoryPort;
 
@@ -15,7 +16,10 @@ public class FindEmailService implements FindEmailPort {
     }
 
     @Override
-    public List<EmailsListDTO> findEmailByCpf(String cpf) {
-        return findEmail.findEmailByCpf(cpf);
+    public List<EmailsListDTO> findEmailByCpf(String cpf) throws EmailNotFoundException {
+        List<EmailsListDTO> emails = findEmail.findEmailByCpf(cpf);
+        if (emails.stream().findFirst().isEmpty())
+            throw new EmailNotFoundException("There is no Emails for the CPF: " + cpf);
+        return emails;
     }
 }

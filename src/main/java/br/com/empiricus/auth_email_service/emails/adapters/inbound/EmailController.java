@@ -3,6 +3,7 @@ package br.com.empiricus.auth_email_service.emails.adapters.inbound;
 import br.com.empiricus.auth_email_service.emails.core.domain.Email;
 import br.com.empiricus.auth_email_service.emails.core.dtos.CreateEmailDTO;
 import br.com.empiricus.auth_email_service.emails.core.dtos.EmailsListDTO;
+import br.com.empiricus.auth_email_service.emails.core.exceptions.EmailNotFoundException;
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.FindEmailPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.SaveEmailPort;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
@@ -25,7 +26,7 @@ public class EmailController {
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<List<EmailsListDTO>> findEmailByCpf(@PathVariable String cpf) {
+    public ResponseEntity<List<EmailsListDTO>> findEmailByCpf(@PathVariable String cpf) throws EmailNotFoundException {
         return new ResponseEntity<>(findEmail.findEmailByCpf(cpf), HttpStatus.OK);
     }
 
