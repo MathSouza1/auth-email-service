@@ -4,6 +4,7 @@ import br.com.empiricus.auth_email_service.emails.adapters.outbound.entity.Email
 import br.com.empiricus.auth_email_service.emails.adapters.outbound.repository.EmailRepository;
 import br.com.empiricus.auth_email_service.emails.core.domain.Email;
 import br.com.empiricus.auth_email_service.emails.core.dtos.EmailsListDTO;
+import br.com.empiricus.auth_email_service.emails.core.dtos.SendEmailDTO;
 import br.com.empiricus.auth_email_service.emails.core.exceptions.EmailNotFoundException;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.FindEmailRepositoryPort;
 import org.springframework.stereotype.Component;
@@ -33,5 +34,11 @@ public class FindEmailRepositoryAdapter implements FindEmailRepositoryPort {
         if (emailEntity.isPresent())
             return emailEntity.get().toEmail();
         throw new EmailNotFoundException("There is no Emails with the identifier: " + id);
+    }
+
+    @Override
+    public List<SendEmailDTO> findEmailByEhAdminIsTrue() {
+        List<EmailEntity> emails = emailRepository.findEmailByAdminIsTrue();
+        return emails.stream().map(SendEmailDTO::new).collect(Collectors.toList());
     }
 }

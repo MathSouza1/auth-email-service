@@ -1,6 +1,8 @@
 package br.com.empiricus.auth_email_service.exceptions;
 
 import br.com.empiricus.auth_email_service.emails.core.exceptions.EmailNotFoundException;
+import br.com.empiricus.auth_email_service.emails.core.exceptions.SaveEmailException;
+import br.com.empiricus.auth_email_service.emails.core.exceptions.SendEmailException;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -50,5 +52,23 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
                 exception.getMessage());
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorMessage);
+    }
+
+    @ExceptionHandler(SendEmailException.class)
+    public ResponseEntity<ServiceErrorMessage> cannotSendEmailErrorMessage(SendEmailException exception) {
+        ServiceErrorMessage errorMessage = new ServiceErrorMessage(
+                new Date(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
+    }
+
+    @ExceptionHandler(SaveEmailException.class)
+    public ResponseEntity<ServiceErrorMessage> cannotSaveEmailErrorMessage(SaveEmailException exception) {
+        ServiceErrorMessage errorMessage = new ServiceErrorMessage(
+                new Date(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                exception.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorMessage);
     }
 }

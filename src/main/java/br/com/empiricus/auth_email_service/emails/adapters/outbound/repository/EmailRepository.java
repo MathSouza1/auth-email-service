@@ -11,4 +11,6 @@ public interface EmailRepository extends JpaRepository<EmailEntity, String> {
     List<EmailEntity> findEmailByCpf(String cpf);
 
     Optional<EmailEntity> findEmailById(String id);
+
+    List<EmailEntity> findEmailByAdminIsTrue();
 }
