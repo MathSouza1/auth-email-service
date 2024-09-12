@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BeanConfiguration {
+public class UserBeanConfiguration {
 
     @Bean
     public FindUserService findUserService(FindUserRepositoryPort findUserRepository) {
