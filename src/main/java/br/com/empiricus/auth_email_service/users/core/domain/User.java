@@ -1,5 +1,7 @@
 package br.com.empiricus.auth_email_service.users.core.domain;
 
+import br.com.empiricus.auth_email_service.users.adapters.outbound.entity.UserEntity;
+
 public class User {
 
     private String id;
@@ -8,12 +10,12 @@ public class User {
     private String password;
     private String creationDate;
     private String updateDate;
-    private String admin;
+    private boolean admin;
 
     public User() {
     }
 
-    public User(String id, String name, String cpf, String password, String creationDate, String updateDate, String admin) {
+    public User(String id, String name, String cpf, String password, String creationDate, String updateDate, boolean admin) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -21,6 +23,16 @@ public class User {
         this.creationDate = creationDate;
         this.updateDate = updateDate;
         this.admin = admin;
+    }
+
+    public User(UserEntity userEntity) {
+        this.id = userEntity.getId();
+        this.name = userEntity.getName();
+        this.cpf = userEntity.getCpf();
+        this.password = userEntity.getPassword();
+        this.creationDate = userEntity.getCreationDate();
+        this.updateDate = userEntity.getUpdateDate();
+        this.admin = userEntity.isAdmin();
     }
 
     public String getId() {
@@ -67,11 +79,11 @@ public class User {
         this.updateDate = updateDate;
     }
 
-    public String getAdmin() {
+    public boolean getAdmin() {
         return admin;
     }
 
-    public void setAdmin(String admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
 }
