@@ -4,5 +4,5 @@ import br.com.empiricus.auth_email_service.users.core.domain.User;
 
 public interface SaveUserRepositoryPort {
 
-    User execute (User user);
+    User execute(User user);
 }

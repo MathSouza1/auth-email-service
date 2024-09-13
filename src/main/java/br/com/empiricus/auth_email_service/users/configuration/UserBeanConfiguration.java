@@ -8,6 +8,7 @@ import br.com.empiricus.auth_email_service.users.core.services.FindUserService;
 import br.com.empiricus.auth_email_service.users.core.services.SaveUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class UserBeanConfiguration {
@@ -18,8 +19,8 @@ public class UserBeanConfiguration {
     }
 
     @Bean
-    public SaveUserService saveUserService(SaveUserRepositoryPort saveUserRepository) {
-        return new SaveUserService(saveUserRepository);
+    public SaveUserService saveUserService(SaveUserRepositoryPort saveUserRepository, PasswordEncoder passwordEncoder) {
+        return new SaveUserService(saveUserRepository, passwordEncoder);
     }
 
     @Bean

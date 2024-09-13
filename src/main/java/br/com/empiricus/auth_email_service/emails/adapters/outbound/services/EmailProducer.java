@@ -26,14 +26,14 @@ public class EmailProducer {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, true);
             mimeMessageHelper.setFrom(sender);
-            for(SendEmailDTO bcc : emails)
+            for (SendEmailDTO bcc : emails)
                 mimeMessageHelper.addTo(bcc.getEmail());
             mimeMessageHelper.setSubject("O email " + changedEmail.getEmail()
-                        + " foi " + action
-                        + " para o usuário de CPF " + changedEmail.getCpf());
+                    + " foi " + action
+                    + " para o usuário de CPF " + changedEmail.getCpf());
             mimeMessageHelper.setText("");
             mailSender.send(message);
-        }  catch (Exception e) {
+        } catch (Exception e) {
             throw new SendEmailException(e.getLocalizedMessage());
         }
     }

@@ -13,5 +13,5 @@ public interface FindEmailRepositoryPort {
 
     Email findEmailById(String id) throws EmailNotFoundException;
 
-    List<SendEmailDTO>  findEmailByEhAdminIsTrue();
+    List<SendEmailDTO> findEmailByEhAdminIsTrue();
 }
