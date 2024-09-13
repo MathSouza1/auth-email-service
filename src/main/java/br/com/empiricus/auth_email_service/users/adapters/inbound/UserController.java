@@ -8,6 +8,7 @@ import br.com.empiricus.auth_email_service.users.core.ports.inbound.DeleteUserPo
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.FindUserPort;
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.SaveUserPort;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +20,14 @@ import java.util.Objects;
 @RequestMapping("/users")
 public class UserController {
 
-    private final FindUserPort findUser;
-    private final SaveUserPort saveUser;
-    private final DeleteUserPort deleteUser;
+    @Autowired
+    private FindUserPort findUser;
 
-    public UserController(FindUserPort findUser, SaveUserPort saveUser, DeleteUserPort deleteUser) {
-        this.findUser = findUser;
-        this.saveUser = saveUser;
-        this.deleteUser = deleteUser;
-    }
+    @Autowired
+    private SaveUserPort saveUser;
+
+    @Autowired
+    private DeleteUserPort deleteUser;
 
     @GetMapping("/{cpf}")
     public ResponseEntity<User> findUserByCpf(@PathVariable String cpf) throws UserNotFoundException {

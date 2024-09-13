@@ -23,11 +23,13 @@ import java.util.Objects;
 public class EmailController {
 
     @Autowired
-    private  FindEmailPort findEmail;
+    private FindEmailPort findEmail;
+
     @Autowired
-    private  SaveEmailPort saveEmail;
+    private SaveEmailPort saveEmail;
+
     @Autowired
-    private  DeleteEmailPort deleteEmail;
+    private DeleteEmailPort deleteEmail;
 
     @GetMapping("/{cpf}")
     public ResponseEntity<List<EmailsListDTO>> findEmailByCpf(@PathVariable String cpf) throws EmailNotFoundException {
