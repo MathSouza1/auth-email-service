@@ -37,7 +37,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<ServiceErrorMessage> unUniqueFieldErrorMessage(DataIntegrityViolationException exception) {
+    public ResponseEntity<ServiceErrorMessage> unUniqueFieldHandler(DataIntegrityViolationException exception) {
         ServiceErrorMessage errorMessage = new ServiceErrorMessage(
                 new Date(),
                 HttpStatus.CONFLICT.value(),
@@ -46,7 +46,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ServiceErrorMessage> unformedFieldErrorMessage(ConstraintViolationException exception) {
+    public ResponseEntity<ServiceErrorMessage> unformedFieldHandler(ConstraintViolationException exception) {
         ServiceErrorMessage errorMessage = new ServiceErrorMessage(
                 new Date(),
                 HttpStatus.UNPROCESSABLE_ENTITY.value(),
@@ -55,7 +55,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SendEmailException.class)
-    public ResponseEntity<ServiceErrorMessage> cannotSendEmailErrorMessage(SendEmailException exception) {
+    public ResponseEntity<ServiceErrorMessage> cannotSendEmailHandler(SendEmailException exception) {
         ServiceErrorMessage errorMessage = new ServiceErrorMessage(
                 new Date(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -64,7 +64,7 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SaveEmailException.class)
-    public ResponseEntity<ServiceErrorMessage> cannotSaveEmailErrorMessage(SaveEmailException exception) {
+    public ResponseEntity<ServiceErrorMessage> cannotSaveEmailHandler(SaveEmailException exception) {
         ServiceErrorMessage errorMessage = new ServiceErrorMessage(
                 new Date(),
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
