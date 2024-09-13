@@ -24,7 +24,7 @@ public class DeleteEmailService implements DeleteEmailPort {
 
     @Override
     public void execute(Email email) throws DeleteEmailException {
-        try{
+        try {
             List<SendEmailDTO> emails = findEmail.findEmailByEhAdminIsTrue();
             if (emails.stream().findFirst().isEmpty())
                 throw new DeleteEmailException("You must have at least one admin user to send the email");

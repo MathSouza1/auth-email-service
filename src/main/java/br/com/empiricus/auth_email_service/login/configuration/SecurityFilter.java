@@ -36,7 +36,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = recoverToken(request);
         String login = loginService.validateToken(token);
 
-        if(Objects.nonNull(login)){
+        if (Objects.nonNull(login)) {
             try {
                 User user = findUser.findByCpf(login);
                 List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
@@ -49,9 +49,9 @@ public class SecurityFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String recoverToken(HttpServletRequest request){
+    private String recoverToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        if(Objects.isNull(authHeader))
+        if (Objects.isNull(authHeader))
             return null;
         return authHeader.replace("Bearer ", "");
     }

@@ -28,6 +28,7 @@ public class LoginController {
         this.passwordEncoder = passwordEncoder;
         this.loginPort = loginPort;
     }
+
     @PostMapping
     public ResponseEntity<TokenDTO> login(@RequestBody LoginDTO loginDTO) throws Exception {
         User user = findUser.findByCpf(loginDTO.getCpf());

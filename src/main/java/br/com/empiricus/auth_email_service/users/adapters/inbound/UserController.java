@@ -8,7 +8,6 @@ import br.com.empiricus.auth_email_service.users.core.ports.inbound.DeleteUserPo
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.FindUserPort;
 import br.com.empiricus.auth_email_service.users.core.ports.inbound.SaveUserPort;
 import jakarta.validation.Valid;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +56,7 @@ public class UserController {
 
     @DeleteMapping("/{cpf}")
     public ResponseEntity<String> deleteUser(@PathVariable String cpf) throws UserNotFoundException {
-        if(findUserByCpf(cpf).getStatusCode().is2xxSuccessful()) {
+        if (findUserByCpf(cpf).getStatusCode().is2xxSuccessful()) {
             deleteUser.execute(cpf);
             return new ResponseEntity<>("User with the CPF: " + cpf + " deleted successfully.", HttpStatus.OK);
         }
