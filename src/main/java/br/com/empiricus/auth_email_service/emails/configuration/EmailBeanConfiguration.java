@@ -1,5 +1,6 @@
 package br.com.empiricus.auth_email_service.emails.configuration;
 
+import br.com.empiricus.auth_email_service.emails.adapters.outbound.services.EmailProducer;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.DeleteEmailRepositoryPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.FindEmailRepositoryPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.outbound.SaveEmailRepositoryPort;
@@ -13,6 +14,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EmailBeanConfiguration {
+
+    @Bean
+    public EmailProducer emailProducer() {
+        return new EmailProducer();
+    }
 
     @Bean
     public FindEmailService findEmailService(FindEmailRepositoryPort findEmailRepository) {
