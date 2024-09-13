@@ -10,6 +10,7 @@ import br.com.empiricus.auth_email_service.emails.core.ports.inbound.DeleteEmail
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.FindEmailPort;
 import br.com.empiricus.auth_email_service.emails.core.ports.inbound.SaveEmailPort;
 import br.com.empiricus.auth_email_service.users.core.exceptions.UserNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +22,12 @@ import java.util.Objects;
 @RequestMapping("/emails")
 public class EmailController {
 
-    private final FindEmailPort findEmail;
-    private final SaveEmailPort saveEmail;
-    private final DeleteEmailPort deleteEmail;
-
-    public EmailController(FindEmailPort findEmail, SaveEmailPort saveEmail, DeleteEmailPort deleteEmail) {
-        this.findEmail = findEmail;
-        this.saveEmail = saveEmail;
-        this.deleteEmail = deleteEmail;
-    }
+    @Autowired
+    private  FindEmailPort findEmail;
+    @Autowired
+    private  SaveEmailPort saveEmail;
+    @Autowired
+    private  DeleteEmailPort deleteEmail;
 
     @GetMapping("/{cpf}")
     public ResponseEntity<List<EmailsListDTO>> findEmailByCpf(@PathVariable String cpf) throws EmailNotFoundException {
